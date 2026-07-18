@@ -1,0 +1,410 @@
+@import "tailwindcss";
+
+/* Class-based dark mode: the Susmatic wrapper (#susmatic-root) gets `.dark`
+   (default on) from its layout; the theme toggle flips it, scoped to this subtree. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ *
+ * Semantic tokens — light theme.
+ * These CSS variables flip in `.dark` below; the @theme inline block
+ * maps them onto Tailwind utilities (bg-surface, border-subtle, …).
+ * ------------------------------------------------------------------ */
+:root {
+  /* Brand — fixed across themes (echo the mark). */
+  --color-brand-navy: #2c3e50;
+  --color-brand-green: #37a06a;
+  --color-brand-blue: #2680c0;
+  --color-brand-emerald: #10b981;
+
+  /* Surfaces & text */
+  --color-background: #f7f9fb;
+  --color-surface: #ffffff;
+  --color-elevated: #ffffff;
+  --color-foreground: #16232e;
+  --color-muted: #5b6b78;
+  --color-subtle: #e5eaef;
+  --color-strong: #cdd6de;
+
+  /* Interaction.
+     `accent` is used for small text (links, labels, eyebrows), so it is a
+     slightly deeper blue than brand-blue #2680c0 to clear AA (4.5:1) on light
+     surfaces. The vibrant brand blue lives on in gradients and fills. */
+  --color-ring: #2680c0;
+  --color-accent: #1b6ea6;
+  --color-accent-foreground: #ffffff;
+
+  /* Categorical chart palette — validated CVD-safe against the chart surface
+     (dataviz skill). Deltas at the bottom use status red/green. */
+  --chart-green: #2e9e63;
+  --chart-blue: #2680c0;
+  --chart-amber: #e3a130;
+  --chart-violet: #6b5dd3;
+  --chart-teal: #14a8a0;
+  --chart-grid: #e9eef2;
+  --chart-up: #d64545;
+  --chart-down: #1f8a4c;
+
+  /* Layered, brand-tinted depth for elevated surfaces. */
+  --shadow-premium:
+    0 1px 2px rgba(22, 35, 46, 0.06),
+    0 10px 30px -10px color-mix(in oklab, var(--color-brand-navy) 22%, transparent),
+    0 30px 60px -20px color-mix(in oklab, var(--color-brand-blue) 12%, transparent);
+
+  --radius: 0.875rem;
+}
+
+.dark {
+  --color-background: #0a1219;
+  --color-surface: #0f1b24;
+  --color-elevated: #14232f;
+  --color-foreground: #e9eff4;
+  --color-muted: #9cafbc;
+  --color-subtle: #21323f;
+  --color-strong: #2c4152;
+  --color-ring: #4aa3e0;
+  --color-accent: #3d9bde;
+  --color-accent-foreground: #06131c;
+
+  /* Chart palette stepped for the dark chart surface (validated). */
+  --chart-green: #2fa36b;
+  --chart-blue: #3e93d4;
+  --chart-amber: #c98500;
+  --chart-violet: #8578de;
+  --chart-teal: #1f9e95;
+  --chart-grid: #21323f;
+  --chart-up: #e46a6a;
+  --chart-down: #46b877;
+
+  --shadow-premium:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 20px 50px -20px rgba(0, 0, 0, 0.55);
+}
+
+/* ------------------------------------------------------------------ *
+ * Map tokens onto Tailwind's utility namespace.
+ * `inline` keeps the var references live so utilities respond to the
+ * theme switch without recompiling.
+ * ------------------------------------------------------------------ */
+@theme inline {
+  --color-background: var(--color-background);
+  --color-surface: var(--color-surface);
+  --color-elevated: var(--color-elevated);
+  --color-foreground: var(--color-foreground);
+  --color-muted: var(--color-muted);
+  --color-subtle: var(--color-subtle);
+  --color-strong: var(--color-strong);
+  --color-ring: var(--color-ring);
+  --color-accent: var(--color-accent);
+  --color-accent-foreground: var(--color-accent-foreground);
+
+  --color-brand-navy: var(--color-brand-navy);
+  --color-brand-green: var(--color-brand-green);
+  --color-brand-blue: var(--color-brand-blue);
+  --color-brand-emerald: var(--color-brand-emerald);
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, sans-serif;
+
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 0.375rem);
+  --radius-2xl: calc(var(--radius) + 0.75rem);
+}
+
+/* ------------------------------------------------------------------ *
+ * Base
+ * ------------------------------------------------------------------ */
+* {
+  border-color: var(--color-subtle);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  /* Native controls (selects, scrollbars) follow the active theme class. */
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Belt-and-braces: decorative blur/gradient layers must never create a
+     horizontal scrollbar on narrow viewports. `clip` (not `hidden`) keeps the
+     root the vertical scroll container, so the sticky header still works. */
+  overflow-x: clip;
+}
+
+::selection {
+  background-color: color-mix(in oklab, var(--color-brand-blue) 26%, transparent);
+}
+
+/* Themed scrollbar — quiet in both modes. */
+html {
+  scrollbar-color: var(--color-strong) transparent;
+}
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-strong);
+  border-radius: 8px;
+  border: 3px solid var(--color-background);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Header gains elevation as the page scrolls — CSS scroll timeline only,
+   with the static translucent style as the universal fallback. */
+@supports (animation-timeline: scroll()) {
+  @keyframes header-elevate {
+    to {
+      background-color: color-mix(in oklab, var(--color-background) 94%, transparent);
+      box-shadow: 0 10px 30px -18px color-mix(in oklab, var(--color-brand-navy) 45%, transparent);
+    }
+  }
+  .header-elevate {
+    animation: header-elevate linear both;
+    animation-timeline: scroll();
+    animation-range: 0 140px;
+  }
+}
+
+/* Visible, consistent focus for keyboard users across both themes. */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-ring);
+  outline-offset: 2px;
+  border-radius: 0.25rem;
+}
+
+/* Utility: brand gradient text / fills, used sparingly. */
+@utility text-brand-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-brand-green),
+    var(--color-brand-blue)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility bg-brand-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-brand-green),
+    var(--color-brand-blue)
+  );
+}
+
+/* Deeper shades of the SAME brand green/blue, tuned so white text clears
+   AA (4.5:1) at both ends. Used for small white-on-gradient text (buttons,
+   badges, step numbers); the vibrant gradient above is kept for large text
+   and decorative fills. */
+@utility bg-brand-gradient-strong {
+  background-image: linear-gradient(100deg, #2a8055, #216f9f);
+}
+
+/* Faint dotted texture for hero / section backdrops. */
+@utility bg-grid {
+  background-image: radial-gradient(
+    color-mix(in oklab, var(--color-foreground) 8%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
+/* Fine blueprint grid — corporate texture for page heroes. */
+@utility bg-lines {
+  background-image:
+    linear-gradient(
+      color-mix(in oklab, var(--color-foreground) 5%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      color-mix(in oklab, var(--color-foreground) 5%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 44px 44px;
+}
+
+/* Soft brand washes anchoring a section's corners. */
+@utility bg-aurora {
+  position: relative;
+  isolation: isolate;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        38rem 22rem at 10% -8%,
+        color-mix(in oklab, var(--color-brand-green) 13%, transparent),
+        transparent 62%
+      ),
+      radial-gradient(
+        42rem 24rem at 96% 2%,
+        color-mix(in oklab, var(--color-brand-blue) 13%, transparent),
+        transparent 62%
+      );
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ * Motion — progressive enhancement only.
+ * Content is fully visible without these rules; animations apply only
+ * when the browser supports them AND the user hasn't asked for less motion.
+ * ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  /* On-load entrance for hero content (with optional stagger). */
+  .animate-in {
+    animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .animate-in-1 {
+    animation-delay: 0.06s;
+  }
+  .animate-in-2 {
+    animation-delay: 0.13s;
+  }
+  .animate-in-3 {
+    animation-delay: 0.2s;
+  }
+  .animate-in-4 {
+    animation-delay: 0.27s;
+  }
+
+  /* Scroll-reveal, driven purely by the CSS view timeline (no JS).
+     Guarded so browsers without support never hide the content. */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 22%;
+    }
+
+    /* Line-draw for stroked SVG paths (requires pathLength="1" on the path).
+       dasharray lives INSIDE the guard so unsupported browsers render the
+       path fully, statically. */
+    @keyframes draw {
+      from {
+        stroke-dashoffset: 1;
+      }
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+    .draw-path {
+      stroke-dasharray: 1;
+      animation: draw 1s cubic-bezier(0.4, 0, 0.2, 1) both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 45%;
+    }
+  }
+
+  /* Gentle levitation for the hero evidence card. */
+  @keyframes float-y {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-10px);
+    }
+  }
+  .float-slow {
+    animation: float-y 5.5s ease-in-out infinite alternate;
+  }
+
+  /* Soft pulse for map pins / live indicators. */
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.45;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.5);
+    }
+  }
+  .pulse-dot {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pulse-soft 3.2s ease-in-out infinite;
+  }
+}
+
+/* Subtle card lift on hover — used on interactive/feature cards. */
+@utility lift {
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-premium);
+  }
+}
+
+/* Layered, brand-tinted elevation. */
+@utility shadow-premium {
+  box-shadow: var(--shadow-premium);
+}
+
+/* Gradient hairline along the top edge — a quieter, branded section divider. */
+@utility hairline-gradient {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--color-brand-green) 55%, var(--color-subtle)),
+      color-mix(in oklab, var(--color-brand-blue) 55%, var(--color-subtle)),
+      transparent
+    );
+  }
+}
+
+/* Glassy top-light on gradient buttons. */
+@utility btn-sheen {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(rgba(255, 255, 255, 0.18), transparent 48%);
+    pointer-events: none;
+  }
+}

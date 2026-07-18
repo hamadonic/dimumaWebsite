@@ -2,13 +2,13 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Dimuma — Empowering Sustainable Excellence',
+  title: 'Dimuma — A sustainability software company',
   description:
-    'Dimuma is a Bahrain-based sustainability ESG solution provider. Collect, report, and analyze your ESG data on one intuitive platform for comprehensive sustainability management.',
+    'Dimuma is a Bahrain-based sustainability software company. We build a SaaS platform of focused products that help organizations measure, manage, and improve their sustainability performance.',
   icons: { icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }] },
   openGraph: {
-    title: 'Dimuma — Empowering Sustainable Excellence',
-    description: 'Collect, report, and analyze your ESG data.',
+    title: 'Dimuma — A sustainability software company',
+    description: 'A SaaS platform of focused sustainability products.',
     type: 'website',
     url: 'https://dimuma.com',
     siteName: 'Dimuma',
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary',
     title: 'Dimuma',
-    description: 'Collect, report, and analyze your ESG data.',
+    description: 'A SaaS platform of focused sustainability products.',
   },
   themeColor: '#a4e5d9',
 }

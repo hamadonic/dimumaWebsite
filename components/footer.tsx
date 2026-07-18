@@ -1,21 +1,21 @@
+import Link from 'next/link'
 import { Logo } from './logo'
 
 const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   {
     title: 'Company',
     links: [
-      { label: 'Home', href: 'https://dimuma.com/' },
-      { label: 'About', href: '#about' },
-      { label: 'Contact us', href: '#contact' },
+      { label: 'Home', href: '/' },
+      { label: 'About', href: '/#about' },
+      { label: 'Contact us', href: '/#contact' },
     ],
   },
   {
-    title: 'Platform',
+    title: 'Products',
     links: [
-      { label: 'ESG reporting', href: '#platform' },
-      { label: 'Data collection', href: '#platform' },
-      { label: 'Insights & analytics', href: '#platform' },
-      { label: 'Request a trial', href: 'mailto:info@dimuma.com?subject=Request%20Demo' },
+      { label: 'All products', href: '/products' },
+      { label: 'Susmatic', href: '/products/susmatic' },
+      { label: 'Project Masar (soon)', href: '/products' },
     ],
   },
 ]
@@ -30,8 +30,8 @@ export function Footer() {
               <Logo onDark />
             </div>
             <p className="max-w-[38ch]">
-              Dimuma W.L.L — a Bahrain-based sustainability ESG solution provider. Empowering
-              businesses for sustainable excellence.
+              Dimuma W.L.L — a Bahrain-based sustainability software company. Building focused SaaS
+              products for sustainability teams.
             </p>
             <p className="mt-4 text-[13px] leading-relaxed">
               Flat/Shop 916, Building 33, Road 1802, Block 318, Al Hoora, Manama, Bahrain
@@ -48,13 +48,13 @@ export function Footer() {
                 {col.title}
               </h5>
               {col.links.map((l) => (
-                <a
+                <Link
                   key={l.label}
                   href={l.href}
                   className="mb-2.5 block transition hover:text-emerald-light"
                 >
                   {l.label}
-                </a>
+                </Link>
               ))}
             </div>
           ))}

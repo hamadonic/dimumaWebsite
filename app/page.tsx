@@ -1,9 +1,8 @@
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Hero } from '@/components/sections/hero'
-import { DashboardShot } from '@/components/sections/dashboard-shot'
+import { ProductsPreview } from '@/components/sections/products-preview'
 import { Features } from '@/components/sections/features'
-import { Insights } from '@/components/sections/insights'
 import { About } from '@/components/sections/about'
 import { Cta } from '@/components/sections/cta'
 
@@ -24,9 +23,8 @@ export default function HomePage() {
         <Hero />
       </div>
 
-      <DashboardShot />
+      <ProductsPreview />
       <Features />
-      <Insights />
       <About />
       <Cta />
       <Footer />

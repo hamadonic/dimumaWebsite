@@ -1,52 +1,51 @@
-import { FileText, Database, BarChart3, Lightbulb, Layers, TrendingUp } from 'lucide-react'
+import { Boxes, Layers, Users, ShieldCheck, LineChart, Rocket } from 'lucide-react'
 
 const FEATURES = [
   {
-    icon: FileText,
-    title: 'ESG reporting & disclosures',
-    body: 'Achieve efficient ESG program management through an intuitive reporting platform, with actionable insights to establish objectives and monitor progress — enhancing organizational transparency.',
-  },
-  {
-    icon: Database,
-    title: 'Intuitive data collection',
-    body: 'User-friendly interfaces and intuitive workflows simplify ESG data collection, making it easier to input and manage data while saving time and reducing errors and inconsistencies.',
-  },
-  {
-    icon: BarChart3,
-    title: 'Data visualization & insights',
-    body: 'Transform data into meaningful visual representations and interactive dashboards to gain insights, identify trends, and communicate your sustainability performance to stakeholders.',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Actionable insights',
-    body: 'Advanced analytics uncover meaningful patterns, trends, and correlations in your ESG data, helping you identify areas for improvement and make informed decisions toward your goals.',
+    icon: Boxes,
+    title: 'Focused products',
+    body: 'Each product does one job exceptionally well — no bloated, do-everything suite. You adopt only what your team actually needs.',
   },
   {
     icon: Layers,
-    title: 'Sustainability management',
-    body: 'Integrate and analyze data across environmental, social, and governance dimensions for a unified, comprehensive view of your organization’s sustainability performance.',
+    title: 'One platform',
+    body: 'Shared identity, security, and a common data foundation underpin every product, so your tools work together instead of in silos.',
   },
   {
-    icon: TrendingUp,
-    title: 'Continuous improvement',
-    body: 'Set performance indicators, track progress toward targets, and receive alerts when deviations occur — a real-time feedback loop that drives continuous improvement.',
+    icon: Users,
+    title: 'Built for real teams',
+    body: 'Designed for how organizations actually work — sustainability, HSE, finance, and operations collaborating in one place.',
+  },
+  {
+    icon: LineChart,
+    title: 'Data you can trust',
+    body: 'Structured workflows and clear ownership mean the numbers are consistent, current, and traceable back to their source.',
+  },
+  {
+    icon: ShieldCheck,
+    title: 'Secure by design',
+    body: 'Enterprise-grade security, role-based access, and privacy built in from the ground up across the whole platform.',
+  },
+  {
+    icon: Rocket,
+    title: 'Grows with you',
+    body: 'Start with a single product and add more as your sustainability program matures — without re-platforming.',
   },
 ]
 
 export function Features() {
   return (
-    <section id="platform" className="px-6 py-24">
+    <section id="why" className="bg-canvas px-6 py-24">
       <div className="mx-auto max-w-[1160px]">
         <p className="text-center text-[13px] font-bold uppercase tracking-[0.08em] text-emerald">
-          What Dimuma does
+          Why teams build on Dimuma
         </p>
         <h2 className="mx-auto mt-3 max-w-[22ch] text-center text-[32px] font-extrabold tracking-[-0.025em] text-navy md:text-[42px]">
-          One platform for your entire ESG program
+          A platform designed to last
         </h2>
         <p className="mx-auto mb-14 mt-3.5 max-w-[58ch] text-center text-[18px] text-muted">
-          From data collection to reporting and analytics, Dimuma helps you streamline
-          sustainability initiatives, strengthen social responsibility, and meet international
-          reporting standards.
+          We build sustainability software the way modern teams want to use it — focused, connected,
+          and built to grow.
         </p>
 
         <div className="grid gap-[22px] md:grid-cols-2 lg:grid-cols-3">
