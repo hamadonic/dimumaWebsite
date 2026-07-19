@@ -65,7 +65,7 @@ Susmatic was merged in from its standalone repo:
   `#susmatic-root` wrapper with `.dark` (its default look). Because the wrapper is a
   subtree, Susmatic's theme never affects the main site.
 - Internal Susmatic links are prefixed with `/products/susmatic` (there is no Next
-  `basePath` in a shared app); its lead API is at `/products/susmatic/api/lead`.
+  `basePath` in a shared app).
 - The whole app is Tailwind **v4** (Susmatic's version); the main site's small design
   system was ported to v4 `@theme` tokens in `app/globals.css`.
 
@@ -73,28 +73,35 @@ Run everything with a single `npm run dev` — no second server, no proxy.
 
 ## Products architecture
 
-Dimuma is the parent platform; each product lives under `/products/<slug>` and is its
-own standalone app/deploy. The main site proxies the product's URL under the domain
-via a Next.js rewrite, so the product's own look and code are never merged in.
+Dimuma is the parent platform; each product lives under `/products/<slug>` in this
+same codebase.
 
-- `/products` — listing page (this repo).
-- `/products/susmatic` — **Susmatic ESG**, a separate Next.js app in `D:\dimuma\susmatic`
-  (basePath `/products/susmatic`). Proxied here via `rewrites()` in `next.config.js`.
+- `/products` — listing page.
+- `/products/susmatic` — **Susmatic ESG**, merged in from its original standalone repo
+  (`D:\dimuma\susmatic`, kept as-is for reference). See "How Susmatic is nested" above.
 - `/products/masar` — **Project Masar**, coming soon (placeholder box, no route yet).
 
-### Running Susmatic locally alongside the main site
+## Susmatic's contact form (Netlify Forms)
 
-```bash
-# terminal 1 — Susmatic on 3001
-cd D:\dimuma\susmatic && npm install && npm run dev -- -p 3001
+The "Request a trial / Book a demo" form
+(`app/products/susmatic/contact/request-form.tsx`) submits via Netlify Forms —
+free, no third-party account, no activation email to click (this replaced an
+earlier Formsubmit-based setup).
 
-# terminal 2 — main site on 3000 (proxies /products/susmatic -> localhost:3001)
-cd D:\dimuma\website && npm run dev
-```
+Because this form lives in a client component, Next.js doesn't emit static HTML
+for it, so Netlify's build-time form scanner can't see it directly. The fix is
+the officially documented workaround for the Next.js App Router
+(https://opennext.js.org/netlify/forms): `public/__forms.html` is a static,
+never-rendered stub declaring the same field names, purely so Netlify detects
+the "lead" form's schema at deploy time. The real form posts its data to
+`/__forms.html` via `fetch()`. Keep the field names in both files in sync if
+the form changes.
 
-In production, set `SUSMATIC_ORIGIN` on the main site to Susmatic's internal URL.
-(Alternatively, route `/products/susmatic/*` to the Susmatic container at the load
-balancer and the rewrite becomes a no-op.)
+**To receive submissions by email**, set this up once after the first deploy:
+Netlify dashboard → your site → **Site configuration → Forms → Form
+notifications → Add notification → Email notification** → enter
+`info@dimuma.com` (add more recipients as needed). Submissions also always
+appear in **Forms** in the Netlify dashboard regardless of notifications.
 
 ## Brand palette
 
@@ -108,16 +115,14 @@ balancer and the rewrite becomes a no-op.)
 | deep           | `#0b1120`  | Dark hero canvas             |
 | canvas         | `#f4f6f8`  | Light section canvas         |
 
-## Deployment (AWS)
+## Deployment (Netlify)
 
-```bash
-docker build -t dimuma-website .
-docker tag dimuma-website:latest 210948570129.dkr.ecr.us-east-1.amazonaws.com/dimuma-website:latest
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 210948570129.dkr.ecr.us-east-1.amazonaws.com
-docker push 210948570129.dkr.ecr.us-east-1.amazonaws.com/dimuma-website:latest
-```
+The site deploys to Netlify from the `main` branch on GitHub
+(`hamadonic/dimumaWebsite`) — every push auto-deploys. Build settings live in
+`netlify.toml` (build command + the official `@netlify/plugin-nextjs` runtime);
+nothing else to configure. `dimuma.com` / `www.dimuma.com` point at Netlify via
+DNS records at the registrar (Name.com), with Force HTTPS enabled once the SSL
+certificate provisions.
 
-> Create the `dimuma-website` ECR repository first if it doesn't exist:
-> `aws ecr create-repository --repository-name dimuma-website --region us-east-1`
->
-> Remember to set `SUSMATIC_ORIGIN` in the container environment.
+A `Dockerfile` and AWS/ECR notes are kept in git history if this ever needs to
+move to a container-based host instead.

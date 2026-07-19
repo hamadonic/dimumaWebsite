@@ -30,28 +30,18 @@ export const siteUrl = `${siteOrigin}${basePath}`;
 export const ogImage = `${siteUrl}/opengraph-image`;
 
 /**
- * Demo / trial lead delivery via Formsubmit (https://formsubmit.co) — free,
- * no account, no server. Each submission is emailed to the address below.
+ * Demo / trial lead delivery via Netlify Forms — free, no third-party account,
+ * no activation email to click. The contact form (app/products/susmatic/contact
+ * /request-form.tsx) posts to public/__forms.html, which Netlify's build-time
+ * crawler uses to detect the "lead" form's schema (Next.js doesn't emit static
+ * HTML for the real client-component form — see
+ * https://opennext.js.org/netlify/forms).
  *
- * SETUP (once, before publishing):
- *   1. Put your inbox in the URL, e.g.
- *      "https://formsubmit.co/ajax/sales@susmatic.com".
- *   2. Submit the form once — Formsubmit emails that inbox an activation link.
- *      Click it. From then on, submissions arrive automatically.
- *   3. RECOMMENDED: Formsubmit then gives you an alias endpoint that hides your
- *      address (looks like "https://formsubmit.co/ajax/el/xxxxxxxx"). Paste that
- *      here instead, so your email isn't visible in the page source.
- *
- * TODO: set this to a real inbox before launch — the placeholder will error.
+ * SETUP (once, in the Netlify dashboard, after the first deploy):
+ *   Site configuration → Forms → Form notifications → Add notification →
+ *   Email notification → enter info@dimuma.com (and any other recipients).
+ *   That's it — no code change needed to add/change recipients.
  */
-export const leadFormEndpoint = "https://formsubmit.co/ajax/info@dimuma.com";
-
-/**
- * Extra recipients CC'd on every demo/trial submission. Only the primary inbox
- * (in leadFormEndpoint) needs Formsubmit activation; CC'd addresses receive
- * copies automatically. Comma-separate to add more.
- */
-export const leadFormCc = "platform@dimuma.com";
 
 export type NavItem = { label: string; href: string };
 

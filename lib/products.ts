@@ -14,7 +14,7 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: 'susmatic',
-    name: 'Susmatic',
+    name: 'Susmatic ESG',
     full: 'Susmatic ESG',
     tagline: 'Simplify Sustainability',
     description:

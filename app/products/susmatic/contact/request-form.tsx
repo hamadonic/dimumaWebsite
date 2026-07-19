@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { Check } from "@/components/ui/icons";
-import { basePath, gccCountries } from "@/lib/site";
+import { gccCountries } from "@/lib/site";
 import { isPersonalEmail } from "@/lib/lead";
 
 type Intent = "trial" | "demo";
@@ -42,13 +42,16 @@ const errorStyle = {
 /**
  * Request-a-trial / book-a-demo form.
  *
- * Submissions are delivered by Formsubmit (see lib/site.ts) — emailed to the
- * configured inbox(es). Guards: honeypot, a work-email-only rule (no Gmail/
- * Outlook/etc.), and a two-part human check (a word + a small sum). All checks
- * are client-side; a determined bot posting directly to Formsubmit bypasses
- * them, so the honeypot + Formsubmit's own spam handling remain the backstop.
- * Deliberately no password or payment field — the product has no self-serve
- * signup, so we never imply an account is created.
+ * Submissions are delivered by Netlify Forms — a static detection stub at
+ * public/__forms.html declares the "lead" form's schema (Next.js doesn't emit
+ * static HTML for this client component, so Netlify can't scan it directly;
+ * see https://opennext.js.org/netlify/forms). Configure the notification
+ * email for submissions in Netlify: Site configuration → Forms → Form
+ * notifications. Guards: honeypot (also enforced server-side by Netlify via
+ * data-netlify-honeypot), a work-email-only rule (no Gmail/Outlook/etc.), and
+ * a two-part human check (a word + a small sum) — the latter two are
+ * client-side only. Deliberately no password or payment field — the product
+ * has no self-serve signup, so we never imply an account is created.
  */
 export function RequestForm({ initialIntent = "trial" }: { initialIntent?: Intent }) {
   const [intent, setIntent] = useState<Intent>(initialIntent);
@@ -99,30 +102,26 @@ export function RequestForm({ initialIntent = "trial" }: { initialIntent?: Inten
     setEmail(emailVal);
     setStatus("submitting");
 
-    // Posts to our own origin; the server route validates and forwards to the
-    // delivery provider (see app/api/lead/route.ts).
-    const payload = {
-      intent,
-      name: data.get("name"),
-      email: emailVal,
-      company: data.get("company"),
-      country: data.get("country"),
-      role: data.get("role"),
-      _honey: data.get("_honey") ?? "",
-    };
+    // Netlify Forms only accepts url-encoded bodies (no JSON), and the target
+    // must be the static detection stub — see public/__forms.html and the
+    // OpenNext workaround linked above.
+    const encoded = new URLSearchParams();
+    encoded.set("form-name", "lead");
+    encoded.set("intent", intent);
+    encoded.set("name", String(data.get("name") ?? ""));
+    encoded.set("email", emailVal);
+    encoded.set("company", String(data.get("company") ?? ""));
+    encoded.set("country", String(data.get("country") ?? ""));
+    encoded.set("role", String(data.get("role") ?? ""));
+    encoded.set("_honey", String(data.get("_honey") ?? ""));
 
     try {
-      const res = await fetch(`${basePath}/api/lead`, {
+      const res = await fetch("/__forms.html", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encoded.toString(),
       });
-      const json = (await res.json().catch(() => ({}))) as { ok?: boolean };
-      if (res.ok && json.ok === true) {
-        setStatus("success");
-      } else {
-        setStatus("error");
-      }
+      setStatus(res.ok ? "success" : "error");
     } catch {
       setStatus("error");
     }

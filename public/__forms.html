@@ -1,0 +1,24 @@
+<html>
+  <head><meta charset="utf-8" /><title>Form detection</title></head>
+  <body>
+    <!--
+      Netlify-Forms detection stub. Never rendered to a visitor — Netlify's
+      build-time crawler scans this static file (under public/, so it ships
+      verbatim to the site root) to learn the "lead" form's schema, since the
+      real form lives in a client component and Next.js doesn't emit static
+      HTML for it. The real form (app/products/susmatic/contact/request-form.tsx)
+      POSTs here via fetch(); see that file for the actual submit handler.
+      Keep the field names below in sync with the payload built there.
+    -->
+    <form name="lead" data-netlify="true" data-netlify-honeypot="_honey" hidden>
+      <input type="hidden" name="form-name" value="lead" />
+      <input name="intent" type="text" />
+      <input name="name" type="text" />
+      <input name="email" type="text" />
+      <input name="company" type="text" />
+      <input name="country" type="text" />
+      <input name="role" type="text" />
+      <input name="_honey" type="text" />
+    </form>
+  </body>
+</html>

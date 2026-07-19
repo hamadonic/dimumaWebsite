@@ -1,6 +1,8 @@
 /**
- * Lead-form email rules. Shared by the client form (instant UX feedback) and
- * the /api/lead route (authoritative server-side enforcement).
+ * Lead-form email rules, used by the client form for instant UX feedback.
+ * Submissions go straight to Netlify Forms (see lib/site.ts) — there is no
+ * server route, so this check is client-side only; Netlify's own spam
+ * filtering plus the form's honeypot are the backstop against abuse.
  *
  * Personal / free inboxes are rejected — this is a work-email-only form. Matched
  * on the exact domain, so a company on Google Workspace (its own domain) passes;
