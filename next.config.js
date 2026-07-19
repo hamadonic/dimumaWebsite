@@ -13,12 +13,16 @@ const cspDirectives = [
 if (isProd) {
   cspDirectives.unshift(
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline'",
+    // 'unsafe-inline' covers Next's own inline bootstrap plus the inline
+    // gtag() config block; googletagmanager.com serves the GA4 script itself.
+    "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com",
     "style-src 'self' 'unsafe-inline'",
     // Susmatic marketing pages use next/image with Unsplash + Picsum sources.
     "img-src 'self' data: blob: https:",
     "font-src 'self' data:",
-    "connect-src 'self'",
+    // GA4 sends hit data to google-analytics.com (region-sharded subdomains
+    // included) and gtag.js itself calls back to googletagmanager.com.
+    "connect-src 'self' https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com",
   )
 }
 
