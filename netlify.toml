@@ -1,0 +1,13 @@
+# Netlify build configuration for the Dimuma site (Next.js App Router).
+# The official Next.js runtime plugin handles SSR, API routes, next/image and
+# next/font automatically — no publish directory needs to be set by hand.
+
+[build]
+  command = "npm run build"
+
+[build.environment]
+  # Next.js 16 requires a modern Node runtime.
+  NODE_VERSION = "20"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
