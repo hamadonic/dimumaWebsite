@@ -360,6 +360,40 @@ html {
   }
 }
 
+/* Framework ticker — infinite marquee of standards badges (see
+   components/marketing/framework-ticker.tsx). Base rules keep it fully
+   accessible/static by default: the duplicate track is hidden, so reduced-
+   motion users get one complete, non-scrolling row. */
+.ticker-viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, black 6%, black 94%, transparent);
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+}
+.ticker-track > .ticker-group + .ticker-group {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes ticker-scroll {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  .ticker-track {
+    animation: ticker-scroll 16s linear infinite;
+  }
+  .ticker-track:hover {
+    animation-play-state: paused;
+  }
+  .ticker-track > .ticker-group + .ticker-group {
+    display: flex;
+  }
+}
+
 /* Subtle card lift on hover — used on interactive/feature cards. */
 @utility lift {
   transition:

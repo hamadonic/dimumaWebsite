@@ -1,4 +1,4 @@
-import { stats } from "./data";
+import { stats as allStats, type Stat } from "./data";
 
 function Info() {
   return (
@@ -11,10 +11,22 @@ function Info() {
   );
 }
 
-export function StatCards() {
+export function StatCards({
+  items = allStats,
+  compact = false,
+}: {
+  items?: Stat[];
+  compact?: boolean;
+}) {
   return (
-    <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-      {stats.map((stat) => (
+    <ul
+      className={
+        compact
+          ? "grid grid-cols-2 gap-3 sm:grid-cols-4"
+          : "grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4"
+      }
+    >
+      {items.map((stat) => (
         <li
           key={stat.label}
           className="flex flex-col gap-3 rounded-xl border border-subtle bg-surface p-4"

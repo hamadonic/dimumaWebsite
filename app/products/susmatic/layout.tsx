@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
 }
 
-export const viewport: Viewport = { themeColor: '#0a1219' }
+export const viewport: Viewport = { themeColor: '#f7f9fb' }
 
 // Structured data for search engines — factual fields only.
 const jsonLd = {
@@ -62,16 +62,17 @@ const jsonLd = {
 
 /**
  * Susmatic product shell — a self-contained subtree under /products/susmatic.
- * It carries its own Tailwind v4 tokens (scoped globals), fonts, and dark
- * theme. `dark` + `bg-background` on the wrapper make the section dark by
- * default (Susmatic's intended look) without touching the main site's theme.
+ * It carries its own Tailwind v4 tokens (scoped globals) and fonts. Light
+ * theme by default (2026 brand refresh) via the `:root` tokens in
+ * globals.css; `bg-background` on the wrapper picks those up without
+ * touching the main site's theme.
  */
 export default function SusmaticLayout({ children }: { children: React.ReactNode }) {
   return (
     <div
       id="susmatic-root"
-      className={`${inter.variable} ${sora.variable} dark flex min-h-dvh flex-col bg-background text-foreground`}
-      style={{ colorScheme: 'dark' }}
+      className={`${inter.variable} ${sora.variable} flex min-h-dvh flex-col bg-background text-foreground`}
+      style={{ colorScheme: 'light' }}
     >
       <script
         type="application/ld+json"

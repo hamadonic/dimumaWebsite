@@ -8,14 +8,14 @@ import {
   PillarCard,
   StepCard,
 } from "@/components/marketing/cards";
-import { EvidenceTrail } from "@/components/marketing/evidence-trail";
+import { FrameworkTicker } from "@/components/marketing/framework-ticker";
 import { GccCoverage } from "@/components/marketing/gcc-coverage";
 import { ReportMoment } from "@/components/marketing/report-moment";
 import { PhotoBand } from "@/components/marketing/photo-band";
 import { InsightsShowcase } from "@/components/marketing/dashboard/insights-showcase";
 import { TrustStrip } from "@/components/marketing/trust-strip";
 import { CTASection } from "@/components/marketing/cta-section";
-import { ArrowRight, Check, Sparkles } from "@/components/ui/icons";
+import { ArrowRight, Sparkles } from "@/components/ui/icons";
 import { cta } from "@/lib/site";
 import {
   audiences,
@@ -40,9 +40,17 @@ export default function HomePage() {
           className="pointer-events-none absolute -top-40 end-0 -z-10 h-[30rem] w-[30rem] max-w-full rounded-full bg-brand-gradient opacity-[0.12] blur-3xl"
         />
         <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+          <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
             <div className="flex flex-col gap-6">
-              <Eyebrow className="animate-in">{hero.eyebrow}</Eyebrow>
+              <span className="animate-in inline-flex w-fit items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+                <Sparkles className="h-3.5 w-3.5 shrink-0" />
+                Agentic ESG
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="pulse-dot absolute inline-flex h-full w-full rounded-full bg-accent" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                </span>
+              </span>
+              <Eyebrow className="animate-in animate-in-1">{hero.eyebrow}</Eyebrow>
               <h1 className="animate-in animate-in-1 font-display text-4xl font-semibold leading-[1.05] tracking-tight text-balance sm:text-5xl lg:text-6xl xl:text-7xl">
                 {hero.title}
               </h1>
@@ -58,15 +66,17 @@ export default function HomePage() {
                   {cta.demo.label}
                 </ButtonLink>
               </div>
-              <p className="animate-in animate-in-4 flex items-start gap-2 text-sm text-muted">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-green" />
-                {hero.note}
-              </p>
             </div>
 
-            <div className="animate-in animate-in-2 flex justify-center lg:justify-end">
-              <EvidenceTrail />
+            {/* The main dashboard, straight from the product — compact, one-box
+                preview so it sits fully within the fold next to the copy. */}
+            <div className="animate-in animate-in-2 float-slow">
+              <InsightsShowcase compact />
             </div>
+          </div>
+
+          <div className="animate-in animate-in-4 mt-10">
+            <FrameworkTicker />
           </div>
         </Container>
       </Section>

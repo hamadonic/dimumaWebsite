@@ -25,13 +25,22 @@ export function LogoMark({ size = 22, onDark = false }: { size?: number; onDark?
 }
 
 /** Full Dimuma logo: infinity-leaf mark + wordmark. */
-export function Logo({ size = 22, onDark = false }: { size?: number; onDark?: boolean }) {
+export function Logo({
+  size = 22,
+  onDark = false,
+  wordmarkColor,
+}: {
+  size?: number
+  onDark?: boolean
+  /** Explicit wordmark color override — takes precedence over `onDark`. */
+  wordmarkColor?: string
+}) {
   return (
     <span className="flex items-center gap-2.5">
       <LogoMark size={size} onDark={onDark} />
       <span
         className="text-[19px] font-extrabold tracking-tight"
-        style={{ color: onDark ? '#ffffff' : NAVY }}
+        style={{ color: wordmarkColor ?? (onDark ? '#ffffff' : NAVY) }}
       >
         Dimuma
       </span>

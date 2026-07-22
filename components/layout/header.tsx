@@ -23,15 +23,15 @@ export function Header() {
             title="Back to Dimuma"
             className="flex items-center opacity-90 transition-opacity hover:opacity-100"
           >
-            <DimumaLogo onDark size={18} />
+            <DimumaLogo size={18} wordmarkColor="#000000" />
           </Link>
           <span aria-hidden className="h-6 w-px bg-subtle" />
           <Link
             href="/products/susmatic"
-            className="rounded-lg py-1"
+            className="flex items-center rounded-lg py-1"
             aria-label="Susmatic ESG — home"
           >
-            <Logo />
+            <Logo compact />
           </Link>
         </div>
 

@@ -2,8 +2,7 @@ import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import { Hero } from '@/components/sections/hero'
 import { ProductsPreview } from '@/components/sections/products-preview'
-import { Features } from '@/components/sections/features'
-import { About } from '@/components/sections/about'
+import { TrustCompliance } from '@/components/sections/trust'
 import { Cta } from '@/components/sections/cta'
 
 export default function HomePage() {
@@ -24,8 +23,7 @@ export default function HomePage() {
       </div>
 
       <ProductsPreview />
-      <Features />
-      <About />
+      <TrustCompliance />
       <Cta />
       <Footer />
     </main>
