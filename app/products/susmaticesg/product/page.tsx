@@ -113,7 +113,7 @@ export default function ProductPage() {
                 immutable audit log — laid out for procurement.
               </p>
             </div>
-            <ButtonLink href="/products/susmatic/security" variant="secondary" className="shrink-0">
+            <ButtonLink href="/products/susmaticesg/security" variant="secondary" className="shrink-0">
               Security &amp; trust
             </ButtonLink>
           </div>

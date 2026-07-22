@@ -29,10 +29,10 @@ export default function NotFound() {
             data, of course, is exactly where you left it.
           </p>
           <div className="mt-2 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/products/susmatic" size="lg">
+            <ButtonLink href="/products/susmaticesg" size="lg">
               Back to home
             </ButtonLink>
-            <ButtonLink href="/products/susmatic/product" variant="secondary" size="lg">
+            <ButtonLink href="/products/susmaticesg/product" variant="secondary" size="lg">
               Explore the product
             </ButtonLink>
           </div>

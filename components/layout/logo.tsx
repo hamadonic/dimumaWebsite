@@ -2,10 +2,10 @@ import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 /**
- * Susmatic brand lockup — 2026 refresh: the official mark (an abstract "S"
- * outline, public/susmatic-mark.svg, extracted from the brand PDF) plus the
- * wordmark. "SUSMATIC" sits in the foreground ink (navy in light, near-white
- * in dark), "ESG" in the brand accent blue. Tagline is "Simplify Sustainability".
+ * Susmatic brand lockup — official mark (an abstract "S" outline,
+ * public/susmatic-mark.svg) plus the wordmark, matching the brand's actual
+ * logo lockup: "SusmaticESG" set as one word in a single ink color (mixed
+ * case, not all-caps) with a small trademark mark in the brand green.
  *
  * `compact` shrinks the mark + wordmark to sit evenly alongside the smaller
  * Dimuma parent-company mark in the header (default size is for the footer,
@@ -34,12 +34,12 @@ export function Logo({
       />
       <span
         className={cn(
-          "inline-flex items-baseline gap-1.5 font-display font-bold uppercase leading-none tracking-[0.02em]",
+          "inline-flex items-baseline gap-1 font-display font-bold leading-none tracking-[0.01em] text-foreground",
           compact ? "text-[17px]" : "text-[1.28rem]",
         )}
       >
-        <span className="text-foreground">Susmatic</span>
-        <span className="text-accent">ESG</span>
+        SusmaticESG
+        <sup className="text-[0.42em] font-semibold text-brand-green">TM</sup>
       </span>
     </span>
   );

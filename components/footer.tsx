@@ -14,7 +14,7 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
     title: 'Products',
     links: [
       { label: 'All products', href: '/products' },
-      { label: 'Susmatic ESG', href: '/products/susmatic' },
+      { label: 'Susmatic ESG', href: '/products/susmaticesg' },
       { label: 'Project Masar (soon)', href: '/products' },
     ],
   },

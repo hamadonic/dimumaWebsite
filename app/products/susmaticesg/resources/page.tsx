@@ -56,7 +56,7 @@ export default function ResourcesPage() {
                 </span>
                 <h2 className="font-display text-lg font-semibold tracking-tight text-balance">
                   <Link
-                    href={`/products/susmatic/resources/${article.slug}`}
+                    href={`/products/susmaticesg/resources/${article.slug}`}
                     className="after:absolute after:inset-0 group-hover:text-accent"
                   >
                     {article.title}

@@ -61,7 +61,7 @@ const jsonLd = {
 }
 
 /**
- * Susmatic product shell — a self-contained subtree under /products/susmatic.
+ * Susmatic product shell — a self-contained subtree under /products/susmaticesg.
  * It carries its own Tailwind v4 tokens (scoped globals) and fonts. Light
  * theme by default (2026 brand refresh) via the `:root` tokens in
  * globals.css; `bg-background` on the wrapper picks those up without

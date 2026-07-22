@@ -156,7 +156,7 @@ export function RequestForm({ initialIntent = "trial" }: { initialIntent?: Inten
           Prefer to talk first? You can also book a demo.
         </p>
         <div className="flex flex-col gap-3 sm:flex-row">
-          <ButtonLink href="/products/susmatic/product" variant="secondary">
+          <ButtonLink href="/products/susmaticesg/product" variant="secondary">
             Explore the product
           </ButtonLink>
           <Button type="button" variant="ghost" onClick={() => setStatus("idle")}>

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* Dimuma main-site design tokens (Tailwind v4, CSS-first). The Susmatic product
-   section carries its own scoped tokens under /products/susmatic. */
+   section carries its own scoped tokens under /products/susmaticesg. */
 @theme {
   --color-navy: #2b2a66;
   --color-navy-600: #413f8f;

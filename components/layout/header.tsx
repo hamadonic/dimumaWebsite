@@ -27,7 +27,7 @@ export function Header() {
           </Link>
           <span aria-hidden className="h-6 w-px bg-subtle" />
           <Link
-            href="/products/susmatic"
+            href="/products/susmaticesg"
             className="flex items-center rounded-lg py-1"
             aria-label="Susmatic ESG — home"
           >

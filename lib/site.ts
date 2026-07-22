@@ -17,7 +17,7 @@ export const site = {
  * Keep in sync with `basePath` in next.config.ts. Used to prefix client fetches
  * (which Next does NOT auto-prefix, unlike next/link).
  */
-export const basePath = "/products/susmatic";
+export const basePath = "/products/susmaticesg";
 
 /**
  * Canonical production URL (origin + base path) — used by metadataBase,
@@ -31,7 +31,7 @@ export const ogImage = `${siteUrl}/opengraph-image`;
 
 /**
  * Demo / trial lead delivery via Netlify Forms — free, no third-party account,
- * no activation email to click. The contact form (app/products/susmatic/contact
+ * no activation email to click. The contact form (app/products/susmaticesg/contact
  * /request-form.tsx) posts to public/__forms.html, which Netlify's build-time
  * crawler uses to detect the "lead" form's schema (Next.js doesn't emit static
  * HTML for the real client-component form — see

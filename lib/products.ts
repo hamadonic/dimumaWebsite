@@ -13,13 +13,13 @@ export type Product = {
 // app (proxied under the main site); coming-soon products render a disabled box.
 export const products: Product[] = [
   {
-    slug: 'susmatic',
+    slug: 'susmaticesg',
     name: 'Susmatic ESG',
     full: 'Susmatic ESG',
     tagline: 'Simplify Sustainability',
     description:
       'Bring sustainability, HSE, finance, and operations into one workflow. Collect ESG data, prove every figure back to its source, and report against GRI, ISSB / IFRS S1 & S2, and CBB.',
-    href: '/products/susmatic',
+    href: '/products/susmaticesg',
     status: 'live',
     icon: 'leaf',
   },

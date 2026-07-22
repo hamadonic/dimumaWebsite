@@ -5,7 +5,7 @@ suite. The corporate site plus every product ship as **one Next.js app** (App Ro
 Tailwind v4), so there is no proxy and one deploy.
 
 - Main site design: **Momentum** — dark-navy hero with emerald glow, emerald/indigo accents.
-- **Susmatic** lives in-app at `/products/susmatic` as a self-contained subtree with its
+- **Susmatic** lives in-app at `/products/susmaticesg` as a self-contained subtree with its
   own scoped Tailwind v4 tokens, fonts (Inter/Sora), and dark-by-default theme — its look
   is preserved exactly. It never mixes styles with the main site.
 
@@ -58,13 +58,13 @@ public/
 
 Susmatic was merged in from its standalone repo:
 
-- Its pages live under `app/products/susmatic/**`; its components under
+- Its pages live under `app/products/susmaticesg/**`; its components under
   `components/{layout,marketing,ui}/**`; its helpers under `lib/{site,cn,lead}.ts`.
-- `app/products/susmatic/layout.tsx` is a nested layout that imports Susmatic's own
+- `app/products/susmaticesg/layout.tsx` is a nested layout that imports Susmatic's own
   `globals.css` (scoped Tailwind v4 tokens), loads its fonts, and renders a
   `#susmatic-root` wrapper with `.dark` (its default look). Because the wrapper is a
   subtree, Susmatic's theme never affects the main site.
-- Internal Susmatic links are prefixed with `/products/susmatic` (there is no Next
+- Internal Susmatic links are prefixed with `/products/susmaticesg` (there is no Next
   `basePath` in a shared app).
 - The whole app is Tailwind **v4** (Susmatic's version); the main site's small design
   system was ported to v4 `@theme` tokens in `app/globals.css`.
@@ -77,14 +77,14 @@ Dimuma is the parent platform; each product lives under `/products/<slug>` in th
 same codebase.
 
 - `/products` — listing page.
-- `/products/susmatic` — **Susmatic ESG**, merged in from its original standalone repo
+- `/products/susmaticesg` — **Susmatic ESG**, merged in from its original standalone repo
   (`D:\dimuma\susmatic`, kept as-is for reference). See "How Susmatic is nested" above.
 - `/products/masar` — **Project Masar**, coming soon (placeholder box, no route yet).
 
 ## Susmatic's contact form (Netlify Forms)
 
 The "Request a trial / Book a demo" form
-(`app/products/susmatic/contact/request-form.tsx`) submits via Netlify Forms —
+(`app/products/susmaticesg/contact/request-form.tsx`) submits via Netlify Forms —
 free, no third-party account, no activation email to click (this replaced an
 earlier Formsubmit-based setup).
 

@@ -98,7 +98,7 @@ export default async function ArticlePage({
           <nav aria-label="Breadcrumb" className="text-sm text-muted">
             <ol className="flex flex-wrap items-center gap-1.5">
               <li>
-                <Link href="/products/susmatic/resources" className="hover:text-accent">
+                <Link href="/products/susmaticesg/resources" className="hover:text-accent">
                   Resources
                 </Link>
               </li>
@@ -167,7 +167,7 @@ export default async function ArticlePage({
 
             <div className="mt-10 max-w-2xl">
               <Link
-                href="/products/susmatic/product"
+                href="/products/susmaticesg/product"
                 className="inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
               >
                 See how Susmatic ESG does this

@@ -5,7 +5,7 @@ const GA_MEASUREMENT_ID = 'G-0SKCFH1C1T'
 
 /**
  * Google Analytics 4 (gtag.js). Rendered once in the root layout, so it loads
- * on every route — the main site, /products, and /products/susmatic alike.
+ * on every route — the main site, /products, and /products/susmaticesg alike.
  *
  * Uses next/script with `afterInteractive` (Next's recommended strategy for
  * analytics: it loads after the page is interactive, so it never blocks
